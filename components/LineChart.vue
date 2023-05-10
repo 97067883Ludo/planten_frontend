@@ -16,7 +16,7 @@ import {
     Legend
 } from 'chart.js'
 import { Line } from 'vue-chartjs'
-import * as chartConfig from '../chartConfig.js'
+import { useMoistureData } from "~/stores/MoistureData";
 
 ChartJS.register(
     CategoryScale,
@@ -28,7 +28,34 @@ ChartJS.register(
     Legend
 )
 
-let data = chartConfig.data;
-let options = chartConfig.options;
+const props = defineProps({
+    deviceId: String,
+})
 
+const moistureData = useMoistureData();
+await moistureData.fill(props.deviceId);
+
+const options = {
+    maintainAspectRatio: false,
+    responsive: true,
+    pointHoverRadius: 5,
+    plugins:{
+        title: {
+            display: true,
+            text: 'Last 24 hours of Bobby'
+        }
+    }
+}
+
+const data = {
+    labels: moistureData.timeStamp,
+    datasets: [
+        {
+            label: 'Bobby',
+            backgroundColor: '#f87979',
+            data: moistureData.moisture,
+            tension: 0.5,
+        }
+    ]
+}
 </script>

@@ -7,8 +7,8 @@ export const useDeviceData = defineStore("DeviceData", {
     }),
 
     actions: {
-        getAllDevices() {
-            axios.get("http://localhost:5098/api/device")
+        async getAllDevices() {
+            await axios.get("http://localhost:5098/api/device")
                 .then((response) => {
                     this.devices = response.data
                     console.log(this.devices)

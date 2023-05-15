@@ -1,5 +1,5 @@
-<template>
-    <div class="h-screen bg-slate-400">
+<template class="bg-slate-400">
+    <div>
         <nav class="bg-gray-800">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div class="flex h-16 items-center justify-between">
@@ -12,7 +12,6 @@
                                 <div v-for="menuItem in menu">
                                 <nuxt-link class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
                                            :to="menuItem.link"
-
                                            v-if="menuItem.link !== route.path"
                                 >{{menuItem.title}}</nuxt-link>
                                 <nuxt-link v-else class="bg-gray-900 text-white hover:text-white block rounded-md px-3 py-2 text-base font-medium"

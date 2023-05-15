@@ -1,6 +1,6 @@
 <template>
     <client-only>
-        <Line :data="data" :options="options"/>
+        <Line :data="data" :options="options" />
     </client-only>
 </template>
 

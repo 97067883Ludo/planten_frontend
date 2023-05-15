@@ -12,7 +12,6 @@
                                 <div v-for="menuItem in menu">
                                 <nuxt-link class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
                                            :to="menuItem.link"
-
                                            v-if="menuItem.link !== route.path"
                                 >{{menuItem.title}}</nuxt-link>
                                 <nuxt-link v-else class="bg-gray-900 text-white hover:text-white block rounded-md px-3 py-2 text-base font-medium"

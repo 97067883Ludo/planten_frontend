@@ -10,7 +10,8 @@
 </template>
 
 <script setup>
-import {useDeviceData} from "~/stores/DeviceData";
+import { useDeviceData } from "~/stores/DeviceData";
+import DeviceCard from "~/components/Devices/DeviceCard.vue";
 
 const DeviceData = useDeviceData();
 DeviceData.getAllDevices();

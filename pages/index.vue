@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { useDeviceData} from "~/stores/DeviceData";
+import { useDeviceData } from "~/stores/DeviceData";
 
 const DeviceData = useDeviceData()
 DeviceData.getAllDevices()

@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const useDeviceData = defineStore("DeviceData", {
     state: () => ({
-        devices: []
+        devices: [],
     }),
 
     actions: {
@@ -13,6 +13,6 @@ export const useDeviceData = defineStore("DeviceData", {
                     this.devices = response.data
                     console.log(this.devices)
                 })
-        }
+        },
     }
 })

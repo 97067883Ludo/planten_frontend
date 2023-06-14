@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import axios from "axios";
+import {makeRequest} from "~/Axios";
 
 export const useSingleDeviceData = defineStore("SingleDevice", {
     state: () => ({
@@ -8,31 +8,42 @@ export const useSingleDeviceData = defineStore("SingleDevice", {
 
     actions: {
         async getSingleDevice(device) {
-            await axios.get("http://localhost:5098/api/device/" + device)
+            await makeRequest.get("/device/" + device)
                 .then((response) => {
                     this.singleDevice = response.data
                     // this.singleDevice.id = response.data.id
                     // this.singleDevice.name = response.data.name
                     // this.singleDevice.ip = response.data.ip
-                    console.log(this.singleDevice.id)
+                    console.log(response.data)
                 })
         },
 
         async saveChanges(device) {
             // console.log(device.name);
-            await axios({
+            await makeRequest({
                 method: 'put',
-                url: 'http://localhost:5098/api/device/',
-                headers: {
-                    'Access-Control-Allow-Origin' : '*',
-                    'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-                }, 
+                url: '/device/',
                 data: {
                     'id': device.id,
                     'name': device.name,
                     'ip': device.ip,
                 }
             }).then(() => {})
+        },
+
+        async activate() {
+            await makeRequest({
+                method: 'put',
+                url: '/activate-device',
+                data: {
+                    'id': this.singleDevice.id,
+                }
+            }).then((response) => {
+                this.singleDevice = response.data
+
+                console.log(response.data)
+
+            })
         }
     }
 })

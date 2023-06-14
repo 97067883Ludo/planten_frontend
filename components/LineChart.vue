@@ -16,7 +16,7 @@ import {
     Legend
 } from 'chart.js'
 import { Line } from 'vue-chartjs'
-import axios from "axios";
+import {makeRequest} from "~/Axios";
 
 ChartJS.register(
     CategoryScale,
@@ -38,7 +38,7 @@ const state = {
     timeStamp: []
 }
 
-await axios.get('http://localhost:5098/api/soilmoisture/' + props.deviceId)
+await makeRequest.get('/soilmoisture/' + props.deviceId)
     .then((request) => {
         request.data.forEach( (value) => {
             state.moisture.push(value.moisture)

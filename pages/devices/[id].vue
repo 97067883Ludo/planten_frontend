@@ -3,8 +3,11 @@
         <devices-device-detail class="w-[49%]"
                 :device-id="route.params.id"
         />
+        <devices-device-detail class="w-[49%]"
+                             :device-id="route.params.id"
+        />
     </div>
-    
+
     <div
       class="h-[360px] bg-white p-2 rounded-xl mb-2 mt-2"
     >
@@ -16,7 +19,6 @@
 </template>
 
 <script setup>
-
 
 const route = useRoute();
 

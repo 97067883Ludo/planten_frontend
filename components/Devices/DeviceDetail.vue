@@ -49,12 +49,30 @@
           </div>
       </form>
 
+    <modal v-if="deviceData.activatedAt == null">
+      <template v-slot:header>
+        New device detected
+      </template>
+      <template v-slot:body>
+        <div>
+          Name: {{deviceData.name}}
+        </div>
+        <div>
+          IP-adress: {{deviceData.ip}}
+        </div>
+      </template>
+      <template v-slot:buttons>
+        <button type="button" @click="activateDevice" class="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 sm:ml-3 sm:w-auto">Activate</button>
+        <nuxt-link  to="/devices" class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto">Cancel</nuxt-link>
+      </template>
+    </modal>
   </div>
 
 </template>
 
 <script setup>
 import { useSingleDeviceData } from "~/stores/SingleDeviceData";
+import Modal from "~/components/Devices/modal.vue";
 
 const device = useSingleDeviceData();
 
@@ -68,9 +86,12 @@ const deviceData = reactive({
     id: device.singleDevice.id,
     name: device.singleDevice.name,
     ip: device.singleDevice.ip,
+    autoDetected: device.singleDevice.autoDetected,
+    activeDevice: device.singleDevice.activeDevice,
+    activatedAt: device.singleDevice.activatedAt
 })
 
-const loading = reactive({
+const loading = ref({
     state: false
 })
 
@@ -78,6 +99,13 @@ async function saveChanges() {
     loading.state = true;
     await device.saveChanges(deviceData);
     loading.state = false;
+}
+
+async function activateDevice() {
+  await device.activate();
+
+  deviceData.activatedAt = device.singleDevice.activatedAt
+
 }
 
 </script>

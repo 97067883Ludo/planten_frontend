@@ -1,10 +1,13 @@
 <template>
     <div class="w-full flex flex-wrap">
         <device-card v-for="device in DeviceData.devices" class="mr-3"
-               :key="device.id"
+               :key="device.id.toInteger"
                :name="device.name"
                :ip="device.ip"
                :id="device.id"
+               :autoDetected="device.autoDetected"
+               :activeDevice="device.activeDevice"
+               :activatedAt="device.activatedAt"
         ></device-card>
     </div>
 </template>

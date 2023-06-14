@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
-import axios from "axios";
+import {makeRequest} from "~/Axios";
+
 
 export const useDeviceData = defineStore("DeviceData", {
     state: () => ({
@@ -8,7 +9,7 @@ export const useDeviceData = defineStore("DeviceData", {
 
     actions: {
         async getAllDevices() {
-            await axios.get("http://localhost:5098/api/device")
+            await makeRequest.get("/device")
                 .then((response) => {
                     this.devices = response.data
                     console.log(this.devices)
